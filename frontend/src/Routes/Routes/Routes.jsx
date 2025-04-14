@@ -18,6 +18,7 @@ import AdminHome from "../../Pages/Dashboard/AdminHome/AdminHome";
 import UserHome from "../../Pages/Dashboard/UserHome/UserHome";
 import Payment from "../../Pages/Dashboard/Payment/Payment";
 import DashboardLayout from "../../Layout/Dashboard/DashboardLayout";
+import AllFlights from "../../Pages/Destinations/Destinations";
 
 export const router = createBrowserRouter([
     {
