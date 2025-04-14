@@ -93,6 +93,7 @@ const AuthProvider = ({children}) => {
         signInGoogle,
         updateUserProfile,
         logOut,
+        // email,
         user,
     }
 

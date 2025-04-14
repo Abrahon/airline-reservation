@@ -6,7 +6,7 @@ import { FaCalendarAlt, FaHome, FaShoppingCart, FaWallet } from "react-icons/fa"
 const DashboardLayout = () => {
     const { user } = useContext(AuthContext);
     console.log(user);
-    const isAdmin = true;
+    const isAdmin = false;
 
     return (
         <div>

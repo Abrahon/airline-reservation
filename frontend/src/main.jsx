@@ -8,9 +8,9 @@ import BookingProvider from './context/BookingProvider.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-       <BookingProvider>
+       {/* <BookingProvider> */}
           <App />
-       </BookingProvider>
+       {/* </BookingProvider> */}
     </AuthProvider>
   </StrictMode>,
 )
