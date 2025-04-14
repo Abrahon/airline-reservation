@@ -7,43 +7,67 @@ import Swal from "sweetalert2";
 
 const SignUp = () => {
 
-    const{createUser, updateUserProfile} = useContext(AuthContext)
+    const{createUser,updateUserProfile} = useContext(AuthContext)
     const navigate = useNavigate();
 
-    const handleSignUp = event =>{
+    const handleSignUp = async (event) => {
         event.preventDefault();
         const form = event.target;
-        const name= form.name.value;
+        const name = form.name.value;
         const email = form.email.value;
         const newPassword = form.newPassword.value;
         const confirmPassword = form.confirmPassword.value;
-        const newValue = {name,email,newPassword,confirmPassword}
-        if(newPassword === confirmPassword){
-            // alert("Passowrd is correct!!")
-            console.log(newValue);
-            createUser(email,newPassword)
-            .then(result=>{
-                const user = result.user;
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "account created successfully !!",
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-                  navigate('/')
-                console.log(user)
-    
-                updateUserProfile(name)
-            })
-            
-            .catch(error => console.log(error))
+      
+        if (newPassword !== confirmPassword) {
+          alert("Passwords do not match!");
+          return;
         }
-        else{
-            alert("Enter the correct password")
+      
+        try {
+          // 1. Create user in Firebase
+          const result = await createUser(email, newPassword);
+          const user = result.user;
+      
+          // 2. Update displayName in Firebase
+          await updateUserProfile(name);
+      
+          // 3. Prepare data to save in MongoDB
+          const userData = {
+            email: user.email,
+            displayName: name, // explicitly passing displayName
+            password: newPassword // (never store plain text password in production)
+          };
+      
+          // 4. Send user to backend MongoDB
+          const res = await fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(userData),
+          });
+      
+          const resultData = await res.json();
+      
+          if (resultData.message === 'user already exists') {
+            alert("User already exists!");
+          } else {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Account created successfully!",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/");
+          }
+      
+          console.log("Server response:", resultData);
+        } catch (error) {
+          console.error("Error signing up:", error);
+          alert("Something went wrong. Try again.");
         }
+      };
+      
 
-    }
     return (
         <div>
             <div className="max-w-md mx-auto shadow-2xl p-4 my-10 rounded-md">
@@ -71,9 +95,11 @@ const SignUp = () => {
                     <div className="flex items-center justify-between">
                         <input className="bg-blue-700 hover:bg-blue-900 cursor-pointer text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value="Signup" type="Submit"/>
                     </div>
-                    <div className="text-center ">
-                        <h1 className="text-xl">OR</h1>
-                    <button className="text-4xl mt-3 "> <FaGoogle></FaGoogle> </button>
+                    <div className="mt-2">
+                        <span className="text-sm ml-2 hover:text-green-500 cursor-pointer">Already you have a WingBooker?</span>
+                        <span className='text-orange-400 font-semibold bg-transparent hover:text-amber-400 hover:font-bold'>
+                            <Link to="/login"> Log In</Link>
+                        </span>
                     </div>
                 </form>
 

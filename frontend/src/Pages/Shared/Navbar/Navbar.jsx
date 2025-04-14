@@ -2,9 +2,7 @@ import { useContext, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../../context/AuthProvider";
-// import Background from "../../../assets/images/Navbar.jpg";
-// import { Link } from "react-router-dom";
-// import { Link } from "react-router-dom";
+
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);

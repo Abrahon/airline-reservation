@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 // import app from '../firebase/firebase.config'
 
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
+import { getAuth,GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile, signInWithPopup } from "firebase/auth";
 import axios from "axios";
 import app from "../Firebase/firebase.init";
 
@@ -10,33 +10,53 @@ const auth = getAuth(app);
 
 const AuthProvider = ({children}) => {
     const[user, setUser] = useState(null)
+    const [loading, setLoading] = useState(true);
+
+    const googleProvider = new GoogleAuthProvider();
     
     const createUser = (email,password)=>{
         return createUserWithEmailAndPassword(auth, email, password);
     }
+    // const providerLogin = (provider) => {
+    //     return signInWithPopup(auth, provider);
+    // }
 
     const signIn = (email, password) =>{
+        setLoading(true);
         return signInWithEmailAndPassword(auth,email,password);
     }
-
-    const updateUserProfile = (name,photo)=>{
-        console.log(name)
-        return updateProfile(auth.currentUser,{
-            displayName: name, photoURL:photo
-            
-            
-        })
-        
+    const signInGoogle = ()=>{
+        setLoading(true);
+        return signInWithPopup(auth, googleProvider);
     }
+
+    const updateUserProfile = (name) => {
+        if (auth.currentUser) {
+          return updateProfile(auth.currentUser, {
+            displayName: name,
+          });
+        }
+        return Promise.reject("No user found");
+      };
+    
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);  // 👈 this will update displayName when user logs in or signs up
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
     
 
-    useEffect(()=>{
-       const unsbuscribe =  onAuthStateChanged(auth, currentUser => {
-            console.log('user observing');
-            setUser(currentUser);
-        })
-        return ()=> unsbuscribe();
-    },[])
+    // useEffect(()=>{
+    //    const unsbuscribe =  onAuthStateChanged(auth, currentUser => {
+    //         console.log('user observing');
+    //         setUser(currentUser);
+    //     })
+    //     return ()=> unsbuscribe();
+    // },[])
+    
 
     // useEffect(() => {
     //     const unsubscribe = onAuthStateChanged(auth, currentUser => {
@@ -70,6 +90,7 @@ const AuthProvider = ({children}) => {
     const authInfo = {
         createUser,
         signIn,
+        signInGoogle,
         updateUserProfile,
         logOut,
         user,
