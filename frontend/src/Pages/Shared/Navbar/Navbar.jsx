@@ -43,7 +43,7 @@ const Navbar = () => {
                 <div className="flex-shrink-0">
                   <Link to="/">
                     <h1 className="font-bold text-2xl text-white hover:text-green-600 italic">
-                      Airline Reservation System
+                    WingBooker
                     </h1>
                   </Link>
                 </div>
