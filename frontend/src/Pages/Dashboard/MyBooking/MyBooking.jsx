@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { BookingsContext } from '../../context/BookingProvider';
+import { BookingsContext } from '../../../context/BookingProvider';
 // import { BookingsContext } from '../../context/BookingsContext';
 
 const MyBooking = () => {
