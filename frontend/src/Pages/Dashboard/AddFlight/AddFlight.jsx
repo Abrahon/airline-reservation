@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import DatePicker from "react-datepicker";
@@ -50,7 +51,7 @@ const AddFlight = () => {
         img: imageData.data.url,
       };
 
-      const res = await fetch("http://localhost:5000/flights", {
+      const res = await fetch("https://wingbooker.vercel.app/flights", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,7 +80,7 @@ const AddFlight = () => {
         <input name="from" placeholder="From (e.g. Jakarta (DXB))" required className="input input-bordered w-full" />
         <input name="to" placeholder="To (e.g. New York (USA))" required className="input input-bordered w-full" />
 
-        {/* 📅 Date Range Picker */}
+        {/* Date Range Picker */}
         <div>
           <label className="block mb-1 font-medium">Select Date Range*</label>
           <DatePicker

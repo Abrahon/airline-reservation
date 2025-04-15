@@ -13,7 +13,6 @@ const Home = () => {
       <Banner></Banner>
       <FindDestination></FindDestination>
       <Destinations></Destinations>
-      {/* <AllFlights></AllFlights> */}
       <FlightFAQ></FlightFAQ>
       
     </div>

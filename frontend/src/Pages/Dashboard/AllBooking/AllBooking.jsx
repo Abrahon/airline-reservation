@@ -1,3 +1,4 @@
+
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthProvider";
 
@@ -11,7 +12,7 @@ const AllBooking = () => {
   
     const email = user.email;
   
-    fetch(`http://localhost:5000/bookings?email=${email}`)
+    fetch(`https://wingbooker.vercel.app/bookings?email=${email}`)
       .then(res => res.json())
       .then(data => {
         setBookings(Array.isArray(data) ? data : []);
@@ -19,8 +20,6 @@ const AllBooking = () => {
       .catch(err => console.error("Error fetching bookings:", err));
   }, [user]);
   
-  
-
   return (
     <div className="max-w-7xl mx-auto p-6">
       <h2 className="text-2xl font-bold mb-4">All Flight Bookings</h2>
@@ -55,9 +54,6 @@ const AllBooking = () => {
          <tr key={booking._id}>
 
          </tr>
-
-            
-              
               </tr>
             ))}
           </tbody>
@@ -66,5 +62,4 @@ const AllBooking = () => {
     </div>
   );
 };
-
 export default AllBooking;

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -5,8 +6,9 @@ const DestinationsCard = ({ flight }) => {
   const { _id, img, from, to, dateRange, price, classType } = flight;
 
   return (
-    <Link to={`/destination/${_id}`} className="block">
-      <div className="bg-white shadow-lg rounded-lg w-72 p-4 mx-2 my-4 hover:shadow-xl transition duration-200 ease-in-out">
+    <div>
+      <Link to={`/destination/${_id}`} className="block">
+      <div className="bg-white shadow-lg rounded-lg p-4 mx-2 my-4 hover:shadow-xl transition duration-200 ease-in-out">
         <img
           src={img}
           alt={`${from} to ${to}`}
@@ -18,6 +20,7 @@ const DestinationsCard = ({ flight }) => {
         <p className="text-lg font-bold mt-1">${price}</p>
       </div>
     </Link>
+    </div>
   );
 };
 

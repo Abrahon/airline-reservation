@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 
 import { getAuth,GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile, signInWithPopup } from "firebase/auth";
 import axios from "axios";
-import app from "../Firebase/firebase.init";
+import app from "./Firebase/firebase.init";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -41,47 +41,13 @@ const AuthProvider = ({children}) => {
     
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);  // 👈 this will update displayName when user logs in or signs up
+      setUser(currentUser);  //  this will update displayName when user logs in or signs up
       setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
     
-
-    // useEffect(()=>{
-    //    const unsbuscribe =  onAuthStateChanged(auth, currentUser => {
-    //         console.log('user observing');
-    //         setUser(currentUser);
-    //     })
-    //     return ()=> unsbuscribe();
-    // },[])
-    
-
-    // useEffect(() => {
-    //     const unsubscribe = onAuthStateChanged(auth, currentUser => {
-    //         setUser(currentUser);
-    //         console.log('current user', currentUser);
-
-    //         // get and set token
-    //         if(currentUser){
-    //             axios.post('http://localhost:5000/jwt', {email: currentUser.email})
-    //             .then(data =>{
-    //                 console.log(data.data.token)
-    //                 localStorage.setItem('access-token', data.data.token)
-    //                 setLoading(false);
-    //             })
-    //         }
-    //         else{
-    //             localStorage.removeItem('access-token')
-    //         }
-
-            
-    //     });
-    //     return () => {
-    //         return unsubscribe();
-    //     }
-    // }, [])
 
     const logOut =()=>{
         return signOut(auth);

@@ -16,7 +16,7 @@ const MyBookings = () => {
   useEffect(() => {
     if (!userEmail) return; // Wait until userEmail is available
   
-    fetch(`http://localhost:5000/bookings?email=${userEmail}`)
+    fetch(`https://wingbooker.vercel.app/bookings?email=${userEmail}`)
       .then((res) => res.json())
       .then((data) => {
         console.log("Fetched bookings:", data);
@@ -31,7 +31,7 @@ const MyBookings = () => {
     if (!confirm) return;
   
     try {
-      const res = await fetch(`http://localhost:5000/bookings/${bookingId}`, {
+      const res = await fetch(`https://wingbooker.vercel.app/bookings/${bookingId}`, {
         method: "DELETE",
       });
   
@@ -95,7 +95,6 @@ const MyBookings = () => {
     Pay Online
   </button>
 </Link>
-            
             <button
               onClick={() => handleCancelBooking(booking._id)}
               className="px-5 py-2 border rounded text-red-600 hover:bg-red-100"
@@ -109,5 +108,4 @@ const MyBookings = () => {
   </div>
 );
 };
-
 export default MyBookings;

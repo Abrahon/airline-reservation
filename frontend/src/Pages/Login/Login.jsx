@@ -1,3 +1,4 @@
+
 import { useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import { AuthContext } from "../../context/AuthProvider";
@@ -81,9 +82,7 @@ const Login = () => {
                     </div>
                     <div className="divider text-center">OR</div>
 
-                    {/* <button type='button' onClick={handleGoogleSignIn} className='w-full text-center  mt-6 py-2 rounded-2xl font-semibold mb-2 btn mr-10 border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white hover:border-red-500 text bg-transparent'>
-                        CONTINUE WITH GOOGLE <FcGoogle className='ml-2 mb-2 text-4xl' />
-                    </button> */}
+                  
                     <div className="flex justify-center items-center mt-6">
                    <button
                     type="button"

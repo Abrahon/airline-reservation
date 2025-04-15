@@ -1,3 +1,4 @@
+
 import { useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
@@ -39,7 +40,7 @@ const SignUp = () => {
           };
       
           // 4. Send user to backend MongoDB
-          const res = await fetch("http://localhost:5000/users", {
+          const res = await fetch("https://wingbooker.vercel.app/users", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(userData),

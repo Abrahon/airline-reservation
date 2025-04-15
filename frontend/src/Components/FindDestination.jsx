@@ -22,7 +22,7 @@ const FindDestination = () => {
       };
     
       const handleSubmit = async () => {
-        const res = await axios.post("http://localhost:5000/api/flights/search", form);
+        const res = await axios.post("https://wingbooker.vercel.app/api/flights/search", form);
         console.log(res.data);
       };
 

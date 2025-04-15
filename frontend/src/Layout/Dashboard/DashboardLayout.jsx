@@ -2,19 +2,16 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { FaCalendarAlt, FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
+import Navbar from "../../Pages/Shared/Navbar/Navbar";
 
 const DashboardLayout = () => {
     const { user } = useContext(AuthContext);
     console.log(user);
     const isAdmin = true;
-    // if (user === 'admin' && email === "admin11@gmail.com") {
-    //     navigate('dashboard');
-    //   } else {
-    //     navigate('/user/dashboard');
-    //   }
 
     return (
         <div>
+            {/* <Navbar></Navbar> */}
             <div className="drawer lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col items-start justify-start my-8 mx-6">

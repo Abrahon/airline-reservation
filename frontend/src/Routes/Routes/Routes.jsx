@@ -3,13 +3,10 @@ import Main from "../../Layout/Main/Main";
 import Home from "../../Pages/Home/Home/Home";
 import SignUp from "../../Pages/SignUp/SignUp";
 import Login from "../../Pages/Login/Login";
-
 import Contact from "../../Pages/Contact/Contact";
 import About from "../../Pages/About/About";
-// import Destination from "../../Components/Destination";
 import Destinations from "../../Pages/Destinations/Destinations";
 import DestinationDetails from "../../Pages/Destinations/DestinationDetails";
-// import MyBooking from "../../Pages/Dashboard/MyBooking/MyBooking";
 import AllUser from "../../Pages/Dashboard/AllUser/AllUser";
 import AllBooking from "../../Pages/Dashboard/AllBooking/AllBooking";
 import AddFlight from "../../Pages/Dashboard/AddFlight/AddFlight";
@@ -66,10 +63,7 @@ export const router = createBrowserRouter([
         path:'/dashboard',
         element:<DashboardLayout></DashboardLayout>,
         children:[
-            // {
-            //     path:'/',
-            //     element:<Dashboard></Dashboard>
-            // },
+            
             {
                 path:'admin-home',
                 element:<AdminHome></AdminHome>
@@ -80,11 +74,6 @@ export const router = createBrowserRouter([
                 element:<AllUser></AllUser>
             },
             
-            // {
-            //     path:'manage-product',
-            //     element:<ManageProduct></ManageProduct>
-
-            // },
             {
                 path:'all-booking',
                 element:<AllBooking></AllBooking>
@@ -98,10 +87,7 @@ export const router = createBrowserRouter([
                 path:"payment",
                 element:<Payment></Payment>
             },
-            // {
-            //     path:"/payment/:bookingId",
-            //     element:<Payment></Payment>
-            // },
+           
             {
                 path:"user-home",
                 element:<UserHome></UserHome>

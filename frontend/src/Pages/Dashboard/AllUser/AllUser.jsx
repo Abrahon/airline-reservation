@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
+  console.log(users)
+
 
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://wingbooker.vercel.app/users")
       .then((res) => res.json())
       .then((data) => setUsers(data))
       .catch((err) => console.error("Failed to fetch users:", err));
@@ -27,7 +29,7 @@ const AllUsers = () => {
             {users.map((user, index) => (
               <tr key={user._id} className="hover:bg-gray-50">
                 <td className="p-3 border">{index + 1}</td>
-                <td className="p-3 border">{user.name || "N/A"}</td>
+                <td className="p-3 border">{user.displayName ||user.name|| "N/A"}</td>
                 <td className="p-3 border">{user.email}</td>
                 <td className="p-3 border">{user.role || "user"}</td>
               </tr>

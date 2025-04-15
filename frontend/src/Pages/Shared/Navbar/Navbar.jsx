@@ -3,7 +3,6 @@ import { FaAngleDown } from "react-icons/fa";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../../context/AuthProvider";
 
-
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isServicesOpen, setIsServicesOpen] = useState(false);
@@ -115,7 +114,7 @@ const Navbar = () => {
               <Link to="/contact" className="text-gray-300 hover:bg-green-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact Us</Link>
               {user?.email ? (
                 <>
-                  <span className="block text-green-300 font-semibold px-3">Hi, {user.displayName || "User"}</span>
+                  <span className="block text-green-300 font-semibold px-3">Hi, {user.displayName || user.name || "User"}</span>
                   <button
                     onClick={handleLogOut}
                     className="text-white bg-red-600 hover:bg-red-700 block w-full text-left px-3 py-2 rounded-md text-base font-medium"
