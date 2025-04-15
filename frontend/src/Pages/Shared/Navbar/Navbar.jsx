@@ -80,6 +80,7 @@ const Navbar = () => {
               <div className={`hidden md:flex items-center`}>
                 <div className="ml-4 flex items-center md:ml-6 gap-4">
                   <Link to="/" className="text-white hover:bg-green-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</Link>
+                  <Link to="/my-booking" className="text-white hover:bg-green-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">MyBooking</Link>
                   <Link to="/about" className="text-white hover:bg-green-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About Us</Link>
                   <Link to="/contact" className="text-white hover:bg-green-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact Us</Link>
                   <Link to="/dashboard" className="text-white hover:bg-green-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</Link>

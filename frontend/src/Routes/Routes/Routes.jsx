@@ -9,7 +9,7 @@ import About from "../../Pages/About/About";
 // import Destination from "../../Components/Destination";
 import Destinations from "../../Pages/Destinations/Destinations";
 import DestinationDetails from "../../Pages/Destinations/DestinationDetails";
-import MyBooking from "../../Pages/Dashboard/MyBooking/MyBooking";
+// import MyBooking from "../../Pages/Dashboard/MyBooking/MyBooking";
 import AllUser from "../../Pages/Dashboard/AllUser/AllUser";
 import AllBooking from "../../Pages/Dashboard/AllBooking/AllBooking";
 import AddFlight from "../../Pages/Dashboard/AddFlight/AddFlight";
@@ -19,6 +19,7 @@ import UserHome from "../../Pages/Dashboard/UserHome/UserHome";
 import Payment from "../../Pages/Dashboard/Payment/Payment";
 import DashboardLayout from "../../Layout/Dashboard/DashboardLayout";
 import AllFlights from "../../Pages/Destinations/Destinations";
+import MyBookings from "../../Pages/MyBooking/MyBooking";
 
 export const router = createBrowserRouter([
     {
@@ -53,7 +54,11 @@ export const router = createBrowserRouter([
             {
                 path: '/contact',
                 element:<Contact></Contact>
-            }
+            },
+            {
+                path:'my-booking',
+                element:<MyBookings></MyBookings>
+            },
              
         ]
     },
@@ -74,10 +79,7 @@ export const router = createBrowserRouter([
                 path:'all-user',
                 element:<AllUser></AllUser>
             },
-            {
-                path:'my-booking',
-                element:<MyBooking></MyBooking>
-            },
+            
             // {
             //     path:'manage-product',
             //     element:<ManageProduct></ManageProduct>
@@ -96,6 +98,10 @@ export const router = createBrowserRouter([
                 path:"payment",
                 element:<Payment></Payment>
             },
+            // {
+            //     path:"/payment/:bookingId",
+            //     element:<Payment></Payment>
+            // },
             {
                 path:"user-home",
                 element:<UserHome></UserHome>

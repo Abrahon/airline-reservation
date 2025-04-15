@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../context/AuthProvider';
 
 const DestinationDetails = () => {
   const { id } = useParams();
   const [flight, setFlight] = useState(null);
+  const { user } = useContext(AuthContext);
+   const userEmail = user?.email;
 
   useEffect(() => {
     fetch(`http://localhost:5000/flights/${id}`)
@@ -14,11 +17,19 @@ const DestinationDetails = () => {
   }, [id]);
 
   const handleBookFlight = () => {
+    if (!userEmail) {
+      return alert("You must be logged in to book a flight!");
+    }
+  
+    // ✅ Remove _id from flight before booking
+    const { _id, ...flightDataWithoutId } = flight;
+  
     const bookedFlight = {
-      ...flight,
+      ...flightDataWithoutId,
+      userEmail,
       bookedAt: new Date()
     };
-
+  
     fetch('http://localhost:5000/bookings', {
       method: 'POST',
       headers: {
@@ -32,7 +43,7 @@ const DestinationDetails = () => {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Flight Booking added successfully",
+            title: "Flight booked successfully",
             showConfirmButton: false,
             timer: 1500
           });
@@ -43,6 +54,7 @@ const DestinationDetails = () => {
         alert("Booking failed");
       });
   };
+  
 
   if (!flight) return <p className="text-center mt-20">Loading...</p>;
 

@@ -6,7 +6,12 @@ import { FaCalendarAlt, FaHome, FaShoppingCart, FaWallet } from "react-icons/fa"
 const DashboardLayout = () => {
     const { user } = useContext(AuthContext);
     console.log(user);
-    const isAdmin = false;
+    const isAdmin = true;
+    // if (user === 'admin' && email === "admin11@gmail.com") {
+    //     navigate('dashboard');
+    //   } else {
+    //     navigate('/user/dashboard');
+    //   }
 
     return (
         <div>
