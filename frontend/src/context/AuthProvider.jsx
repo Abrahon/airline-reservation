@@ -41,7 +41,7 @@ const AuthProvider = ({children}) => {
     
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);  //  this will update displayName when user logs in or signs up
+      setUser(currentUser);  //   this will update displayName when user logs in or signs up
       setLoading(false);
     });
 

@@ -9,6 +9,7 @@ const Navbar = () => {
     const [isPagesOpen, setIsPagesOpen] = useState(false);
     const {user,logOut} = useContext(AuthContext);
     console.log(user)
+    const isAdmin = false;
     
 
     const toggleNavbar = () => {
@@ -82,12 +83,14 @@ const Navbar = () => {
                   <Link to="/my-booking" className="text-white hover:bg-green-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">MyBooking</Link>
                   <Link to="/about" className="text-white hover:bg-green-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About Us</Link>
                   <Link to="/contact" className="text-white hover:bg-green-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact Us</Link>
-                  <Link to="/dashboard" className="text-white hover:bg-green-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</Link>
+                  {/* <Link to='/dashboard' className="text-white hover:bg-green-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</Link> */}
+                  <NavLink to={isAdmin ? '/dashboard/admin-home' : '/dashboard/user-home'}>Dashboard</NavLink>
+
     
                   {user?.email ? (
                     <>
                       <span className="text-green-300 font-semibold">
-                        {user.displayName || "User"}
+                        {user.displayName||user.name||"User"}
                       </span>
                       <button
                         onClick={handleLogOut}

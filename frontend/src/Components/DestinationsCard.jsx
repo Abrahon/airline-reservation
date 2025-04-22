@@ -1,9 +1,13 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const DestinationsCard = ({ flight }) => {
   const { _id, img, from, to, dateRange, price, classType } = flight;
+  // const navigate = useNavigate();
+
+
 
   return (
     <div>

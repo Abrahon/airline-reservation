@@ -50,8 +50,19 @@ const Login = () => {
         signInGoogle(googleProvider)
             .then(result => {
                 const user = result.user;
-                let userInfo = { displayName: user?.displayName, email: user?.email, uid: user?.uid, photoUrl: user?.photoURL };
-                saveUser(userInfo);
+                // let userInfo = { displayName: user?.displayName, email: user?.email, uid: user?.uid, photoUrl: user?.photoURL };
+                // saveUser(userInfo);
+                // const user= result.user;
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "user signin successfully !!",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                  navigate('/');
+                console.log(user)
+                // show the user name
             })
             .catch(error => console.log(error.message))
     }
@@ -59,8 +70,8 @@ const Login = () => {
         <div>
         <div className="max-w-md mx-auto my-10 shadow-2xl p-4 rounded-md">
             <div className="flex justify-between py-4">
-            <Link to='/signup'><button className="text-2xl text-blue-600 hover:text-blue-800 font-bold text-center">Sign Up</button></Link>
-            <Link to='/login'><button className="text-2xl text-blue-600 hover:text-blue-8 font-bold text-center">Sign In</button></Link>
+            {/* <Link to='/signup'><button className="text-2xl text-blue-600 hover:text-blue-800 font-bold text-center">Sign Up</button></Link> */}
+            {/* <Link to='/login'><button className="text-2xl text-blue-600 hover:text-blue-8 font-bold text-center">Sign In</button></Link> */}
             </div>
             <form onSubmit={handleSignIn}>
              

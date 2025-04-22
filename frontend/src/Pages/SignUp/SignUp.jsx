@@ -73,8 +73,8 @@ const SignUp = () => {
         <div>
             <div className="max-w-md mx-auto shadow-2xl p-4 my-10 rounded-md">
                 <div className="flex justify-between py-4">
-                <Link to='/signup'><button className="text-2xl text-blue-600 hover:text-blue-800 font-bold text-center">Sign Up</button></Link>
-                <Link to='/login'><button className="text-2xl text-blue-600 hover:text-blue-8 font-bold text-center">Sign In</button></Link>
+                {/* <Link to='/signup'><button className="text-2xl text-blue-600 hover:text-blue-800 font-bold text-center">Sign Up</button></Link> */}
+                {/* <Link to='/login'><button className="text-2xl text-blue-600 hover:text-blue-8 font-bold text-center">Sign In</button></Link> */}
                 </div>
                 <form onSubmit={handleSignUp}>
                     <div className="mb-4">

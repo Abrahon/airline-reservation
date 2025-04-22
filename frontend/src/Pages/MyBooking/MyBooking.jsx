@@ -90,11 +90,13 @@ const MyBookings = () => {
           {/* Buttons */}
           <div className="flex flex-col items-end space-y-3">
             
-          <Link to={`/payment/${booking._id}`}>
+          <Link to={`/dashboard/payment/${booking._id}`}>
   <button className="px-5 py-2 border rounded text-blue-600 hover:bg-blue-100">
     Pay Online
   </button>
 </Link>
+
+
             <button
               onClick={() => handleCancelBooking(booking._id)}
               className="px-5 py-2 border rounded text-red-600 hover:bg-red-100"

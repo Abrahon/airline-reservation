@@ -1,147 +1,113 @@
-// import React, { useState } from 'react'
-import axios from "axios";
-import { FaExchangeAlt } from "react-icons/fa";
-import { IoIosArrowDown } from "react-icons/io";
-import { MdFlightTakeoff } from "react-icons/md";
-import { BsClipboard2Check } from "react-icons/bs";
-import { FaCheckCircle } from "react-icons/fa";
-import { useState } from "react";
+import React, { useState } from 'react';
+import DestinationsCard from './DestinationsCard';
 
-const FindDestination = () => {
-    const [form, setForm] = useState({
-        from: "",
-        to: "",
-        tripType: "Round Trip",
-        depart: "",
-        return: "",
-        passengerClass: "Economy",
-      });
-    
-      const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
-      };
-    
-      const handleSubmit = async () => {
-        const res = await axios.post("https://wingbooker.vercel.app/api/flights/search", form);
-        console.log(res.data);
-      };
+const SearchFlights = () => {
+  const [form, setForm] = useState({
+    from: '',
+    to: '',
+    passengerClass: 'Economy Class',
+  });
 
-    return (
-        <div className="min-h-screen bg-neutral-100 flex flex-col items-center justify-start p-4">
-          {/* Navbar */}
-          <div className="flex w-full bg-white shadow-md py-4 px-6 justify-between items-center max-w-6xl rounded-t-2xl">
-            <div className="flex gap-6 text-sm font-semibold">
-              <div className="text-[#681a3c] flex items-center gap-1">
-                <MdFlightTakeoff />
-                AIR BOOKING
-              </div>
-              <div className="flex items-center gap-1">
-                <BsClipboard2Check /> MY TRIPS
-              </div>
-              <div className="flex items-center gap-1">
-                <FaCheckCircle /> CHECK-IN
-              </div>
-              <div className="flex items-center gap-1">
-                <MdFlightTakeoff /> FLIGHT STATUS
-              </div>
-            </div>
-          </div>
-    
-          {/* Promo Info */}
-          <div className="bg-[#681a3c] text-white w-full max-w-6xl p-3 flex flex-col rounded-b-md">
-            <p className="text-xs">Just from $12</p>
-            <p className="font-semibold">WingBooker</p>
-          </div>
-    
-          {/* Search Form */}
-          <div className="bg-white w-full max-w-6xl p-4 mt-4 rounded-xl shadow-lg flex flex-wrap items-center justify-between">
-            <div className="flex items-center gap-4 flex-1">
-              <div className="w-28">
-                <label className="block text-sm text-gray-600">From</label>
-                <input
-                  type="text"
-                  name="from"
-                  value={form.from}
-                  onChange={handleChange}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-    
-              <FaExchangeAlt className="text-gray-500" />
-    
-              <div className="w-28">
-                <label className="block text-sm text-gray-600">To</label>
-                <input
-                  type="text"
-                  name="to"
-                  value={form.to}
-                  onChange={handleChange}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-    
-              <div className="w-32">
-                <label className="block text-sm text-gray-600">Trip</label>
-                <select
-                  name="tripType"
-                  value={form.tripType}
-                  onChange={handleChange}
-                  className="w-full p-2 border rounded"
-                >
-                  <option value="One Way">One Way</option>
-                  <option value="Round Trip">Round Trip</option>
-                </select>
-              </div>
-    
-              <div>
-                <label className="block text-sm text-gray-600">Depart</label>
-                <input
-                  type="date"
-                  name="depart"
-                  value={form.depart}
-                  onChange={handleChange}
-                  className="p-2 border rounded"
-                />
-              </div>
-    
-              <div>
-                <label className="block text-sm text-gray-600">Return</label>
-                <input
-                  type="date"
-                  name="return"
-                  value={form.return}
-                  onChange={handleChange}
-                  className="p-2 border rounded"
-                />
-              </div>
-    
-              <div className="w-48">
-                <label className="block text-sm text-gray-600">Passenger / Class</label>
-                <select
-                  name="passengerClass"
-                  value={form.passengerClass}
-                  onChange={handleChange}
-                  className="w-full p-2 border rounded"
-                >
-                  <option value="Economy">1 Passenger, Economy</option>
-                  <option value="Business">1 Passenger, Business</option>
-                  <option value="First Class">1 Passenger, First Class</option>
-                </select>
-              </div>
-            </div>
-    
-            <div className="mt-4 flex justify-end w-full">
-              <button
-                onClick={handleSubmit}
-                className="bg-[#fcb900] hover:bg-yellow-400 text-black px-6 py-2 rounded-full font-semibold flex items-center gap-1"
-              >
-                Show Flights <MdFlightTakeoff />
-              </button>
-            </div>
-          </div>
-        </div>
-      );
+  const [results, setResults] = useState([]);
+  const [notFound, setNotFound] = useState(false);
+  console.log(results);
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSearch = () => {
+    if (!form.from || !form.to || !form.passengerClass) {
+      alert('Please fill in all fields');
+      return;
     }
 
+    fetch('http://localhost:5000/flights/search', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: form.from.trim().toLowerCase(),
+        to: form.to.trim().toLowerCase(),
+        passengerClass: form.passengerClass,
+      }),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          setResults([]);
+          setNotFound(true);
+          return [];
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (data && data.length > 0) {
+          setResults(data);
+          setNotFound(false);
+        } else {
+          setResults([]);
+          setNotFound(true);
+        }
+      })
+      .catch((err) => {
+        console.error('Search error:', err);
+        setNotFound(true);
+        setResults([]);
+      });
+  };
 
-export default FindDestination
+  return (
+    <div className="p-6">
+      <h2 className="text-xl font-bold mb-4 text-center">Search Flights</h2>
+
+      <div className="flex flex-wrap justify-center gap-4 mb-6">
+        <input
+          type="text"
+          name="from"
+          placeholder="From"
+          value={form.from}
+          onChange={handleChange}
+          className="p-2 border rounded w-40"
+        />
+        <input
+          type="text"
+          name="to"
+          placeholder="To"
+          value={form.to}
+          onChange={handleChange}
+          className="p-2 border rounded w-40"
+        />
+        <select
+          name="passengerClass"
+          value={form.passengerClass}
+          onChange={handleChange}
+          className="p-2 border rounded w-48"
+        >
+          <option value="Economy Class">Economy</option>
+          <option value="Business Class">Business</option>
+          <option value="First Class">First Class</option>
+        </select>
+
+        <button
+          onClick={handleSearch}
+          className="bg-[#fcb900] hover:bg-yellow-400 px-4 py-2 rounded font-semibold"
+        >
+          Show Flights
+        </button>
+      </div>
+
+      {notFound ? (
+        <p className="text-center text-red-500 font-semibold">No flights found.</p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {results.map((flight) => (
+            <DestinationsCard key={flight._id} flight={flight} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default SearchFlights;

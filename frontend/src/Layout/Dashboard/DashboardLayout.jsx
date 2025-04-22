@@ -2,12 +2,13 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { FaCalendarAlt, FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
-import Navbar from "../../Pages/Shared/Navbar/Navbar";
+// import Navbar from "../../Pages/Shared/Navbar/Navbar";
+// import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 
 const DashboardLayout = () => {
     const { user } = useContext(AuthContext);
     console.log(user);
-    const isAdmin = true;
+    const isAdmin = false;
 
     return (
         <div>
@@ -15,10 +16,9 @@ const DashboardLayout = () => {
             <div className="drawer lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col items-start justify-start my-8 mx-6">
+               
                     {/* Page content here */}
-                    
                     <Outlet />
-
                     
                     <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden mt-4">
                         Open drawer
@@ -39,7 +39,7 @@ const DashboardLayout = () => {
                             ) : (
                                 <>
                                     <li className="font-semibold"><NavLink to='/dashboard/user-home'><FaHome /> User Home</NavLink></li>
-                                    <li className="font-semibold"><NavLink to='/dashboard/payment'><FaWallet /> Payment History</NavLink></li>
+                                    <li className="font-semibold"><NavLink to='/dashboard/payment-history'><FaWallet /> Payment History</NavLink></li>
                                     <li className="font-semibold"><NavLink to='/dashboard/my-booking'><FaWallet /> My Booking</NavLink></li>
                                 </>
                             )
